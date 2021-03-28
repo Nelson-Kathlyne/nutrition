@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -25,7 +25,6 @@
         const detailsDiv = document.getElementById('details');
 
 
-
         const getDetails = (fdcId) => {
             detailsDiv.innerHTML = "";
             resultsDiv.innerHTML = "";
@@ -35,11 +34,16 @@
                 if (this.readyState == 4 && this.status == 200) {
                     var result = JSON.parse(this.responseText);
                     var description = result.description;
-                    var brand = result.brandOwner
-                    var ingredients = result.ingredients
-                    detailsDiv.innerHTML += "<h2>"+description+"</h2>";
-                    detailsDiv.innerHTML += "<h3>"+brand+"</h3>"
-                    detailsDiv.innerHMTL += "<h3>"+ingredients+"</h3>";
+                    var brand = result.brandOwner;
+                    var ingredients = result.ingredients ;
+                    var nutrients = result.foodNutrients;
+                    var cal = nutrients[3];
+                    var calorie = cal.amount;
+                    console.log(cal);
+                    detailsDiv.innerHTML += "<h3>"+description+"</h3>";
+                    detailsDiv.innerHTML += "<p> Brand: "+brand+"</p>";
+                    detailsDiv.innerHTML += "<p> Ingredients: " +result.ingredients+"</p>";
+                    
                 }
             };
             xmlhttp.open("GET", queryUrl, true);
